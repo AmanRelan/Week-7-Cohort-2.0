@@ -1,68 +1,39 @@
-import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil";
-import { countAtom } from "./store/atoms/count";
-import { evenSelector } from "./store/selectors/evenSelector";
+// import { useState, useEffect } from "react";
+// import BackgroundChanger from "./components/BackgroundChanger";
+// import ProfileCard from "./components/ProfileCard";;
+// import ParaCounter from "./components/ParaCounter";
+
+import BirthdayWisher from "./components/BirthdayWisher";
+
+// import OtpLogin from "./components/OtpLogin";
 
 const App = () => {
-  // Remove the state variable and create an atom in `store/atoms/count`
-  // const [count, setCount] = useState(0);
-
-  // wrap anyone that wants to use the teleported value inside a provider
+  // const [userInfo, setUserInfo] = useState([]);
+  // useEffect(() => {
+  //   fetchGithubUser();
+  // }, []);
+  // const fetchGithubUser = async () => {
+  //   const userData = await fetch("https://api.github.com/users/AmanRelan");
+  //   const jsonData = await userData.json();
+  //   setUserInfo(jsonData);
+  // };
   return (
     <div>
-      <RecoilRoot>
-        <Count />
-      </RecoilRoot>
+      {/* <ProfileCard
+        name={userInfo.name}
+        age={26}
+        city={userInfo.location}
+        followers={userInfo.followers}
+        likes={userInfo.following}
+        photos={userInfo.public_repos}
+        profilePicture={userInfo.avatar_url}
+      />
+      <BackgroundChanger />
+      <ParaCounter /> */}
+      {/* <OtpLogin /> */}
+      <BirthdayWisher />
     </div>
   );
 };
 
-function Count() {
-  return (
-    <div>
-      <CountRenderer />
-      <Buttons />
-    </div>
-  );
-}
-function CountRenderer() {
-  // Just needs the value of the count, so we will use just the get recoil value hook
-  const count = useRecoilValue(countAtom);
-
-  return (
-    <div>
-      <b>{count}</b>
-      <EventCountRenderer />
-    </div>
-  );
-}
-
-function Buttons() {
-  // It needs both the count and setCount
-  console.log("Re rendering");
-  const setCount = useSetRecoilState(countAtom);
-  return (
-    <div>
-      <button
-        onClick={() => {
-          setCount((count) => count + 1);
-        }}
-      >
-        Increase Button
-      </button>
-      <button
-        onClick={() => {
-          setCount((count) => count - 1);
-        }}
-      >
-        Decrease Button
-      </button>
-    </div>
-  );
-}
-
-function EventCountRenderer() {
-  const isEven = useRecoilValue(evenSelector);
-
-  return <div>{isEven ? "It is Even" : null}</div>;
-}
 export default App;
